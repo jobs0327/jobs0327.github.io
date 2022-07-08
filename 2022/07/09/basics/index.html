@@ -1,0 +1,279 @@
+<!DOCTYPE html><html lang="[&quot;zh-Hans&quot;,&quot;en&quot;,&quot;default&quot;]" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>basics | 不忘初心</title><meta name="keywords" content="interview"><meta name="author" content="乾學長"><meta name="copyright" content="乾學長"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Basics浏览器从输入 url 到渲染页面，发生了什么 首先解析域名，利用 dns 服务器解析域名成 ip 域名为什么要解析？ 首先域名只能是 字母+数字+一些特殊符号（就是不包含百分号、双引号）不转义会出歧义 Utf-8 编码 encodeURL encodeURLComponent 编码   dns 如何工作？ 首先会从本机的 hosts 文件查找，查找到返回， 然后从本机配置的 dns 服">
+<meta property="og:type" content="article">
+<meta property="og:title" content="basics">
+<meta property="og:url" content="http://blog.huangqian.vip/2022/07/09/basics/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="Basics浏览器从输入 url 到渲染页面，发生了什么 首先解析域名，利用 dns 服务器解析域名成 ip 域名为什么要解析？ 首先域名只能是 字母+数字+一些特殊符号（就是不包含百分号、双引号）不转义会出歧义 Utf-8 编码 encodeURL encodeURLComponent 编码   dns 如何工作？ 首先会从本机的 hosts 文件查找，查找到返回， 然后从本机配置的 dns 服">
+<meta property="og:locale">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-07-08T18:56:42.000Z">
+<meta property="article:modified_time" content="2022-07-08T19:34:56.955Z">
+<meta property="article:author" content="乾學長">
+<meta property="article:tag" content="interview">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://blog.huangqian.vip/2022/07/09/basics/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'basics',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-09 03:34:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">不忘初心</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">basics</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-07-08T18:56:42.000Z" title="Created 2022-07-09 02:56:42">2022-07-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-07-08T19:34:56.955Z" title="Updated 2022-07-09 03:34:56">2022-07-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/basics/">basics</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="basics"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h1><h2 id="浏览器从输入-url-到渲染页面，发生了什么"><a href="#浏览器从输入-url-到渲染页面，发生了什么" class="headerlink" title="浏览器从输入 url 到渲染页面，发生了什么"></a>浏览器从输入 url 到渲染页面，发生了什么</h2><ol>
+<li>首先解析域名，利用 dns 服务器解析域名成 ip<ul>
+<li>域名为什么要解析？<ul>
+<li>首先域名只能是 字母+数字+一些特殊符号（就是不包含百分号、双引号）不转义会出歧义</li>
+<li>Utf-8 编码</li>
+<li>encodeURL encodeURLComponent 编码</li>
+</ul>
+</li>
+<li>dns 如何工作？<ul>
+<li>首先会从本机的 hosts 文件查找，查找到返回，</li>
+<li>然后从本机配置的 dns 服务器缓存查找</li>
+<li>然后从根 DNS 服务器查找（全球 13 台）</li>
+<li>然后试图解析.baidu.com 直到能解析</li>
+</ul>
+</li>
+<li>前端 dns 优化<ul>
+<li>html 页面头部写入 dns 缓存地址</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>拿到 ip 以后，建立 TCP 链接（三次握手以及后面的四次分手）<ul>
+<li>为什么是三次两次不行？<ul>
+<li>两次可能会出现 A =&gt; B，B 未收到，A 又发送给 B</li>
+<li>A=&gt;B，A 未收到</li>
+</ul>
+</li>
+<li>第一次握手：A 发送位码 SYN=1 TCP 包给服务器，并且随机产生一个确认号，主机 B 收到 SYN 码知道 A 要建立连接</li>
+<li>第二次握手：B 收到请求以后，向 A 发送确认号（主机 A 的确认码+1），SYN=1，SEQ=随机数的包</li>
+<li>第三次握手：A 收到确认号检查是否正确，是否是第一次发送值+1，以及位码是否为 1，如果正确，A 会再次发送主机 B SEQ+1，ack=1 给 B，主机 B 收到以后建立成功</li>
+</ul>
+</li>
+<li>然后是强缓存，协商缓存<ul>
+<li>强缓存，cache-control：no-cache 直接进入协商缓存，如果在时间内命中强缓存，不发送请求直接本地缓存读取文件， 如果没有 cache-control 会读取 expires 对比是否过期</li>
+<li>协商缓存，向服务器发送 if-None-match 和 if-modify-since 请求，服务器会比较 etag，相同，协商缓存，304；不一致，新资源+200+新的 etag</li>
+</ul>
+</li>
+<li>拿到 html css js<ol>
+<li>构建 DOM 树</li>
+<li>构建 CSSOM 树</li>
+<li>执行 JS</li>
+<li>构建渲染树</li>
+<li>渲染树</li>
+<li>布局</li>
+<li>绘制</li>
+</ol>
+</li>
+<li>页面渲染</li>
+</ol>
+<h2 id="Vue-和-React-对比"><a href="#Vue-和-React-对比" class="headerlink" title="Vue 和 React 对比"></a>Vue 和 React 对比</h2><p><strong>Vue</strong> 的思想是响应式的，也就是基于数据可变，通过对每一个属性建立 Watcher 来监听，当属性发生变化的时候，响应式的更新对应的虚拟 DOM</p>
+<p><strong>React</strong> 主张函数式编程，所以推崇纯组件，数据不可变，单向数据流</p>
+<p>监听数据变化实现原理：</p>
+<ul>
+<li>Vue 通过 getter/setter 以及一些函数的劫持，能精确知道数据变化，不需要特别的优化就能达到很好的性能</li>
+<li>React 通过比较引用的方式进行，如果不优化（PureCompont/shouldComponentUpdate）可能会导致大量不必要的 VDOM 重新渲染</li>
+</ul>
+<p>组件通信区别： jsx 和.vue 模版</p>
+<ul>
+<li>HOC 和 Mixins（Vue 中组合不用功能通过 mixin），React 通过高阶组件</li>
+</ul>
+<p>性能优化：</p>
+<ul>
+<li>React：shouldComponentUpdate</li>
+<li>Vue：内部实现 shouldComponentUpdate 优化，由于依赖追踪系统，通过 watcher 判断是否需要重新渲染（页面数据量大时，性能较差）</li>
+</ul>
+<h2 id="Vuex-和-Redux-区别"><a href="#Vuex-和-Redux-区别" class="headerlink" title="Vuex 和 Redux 区别"></a>Vuex 和 Redux 区别</h2><p><strong>Redux</strong> 使用的是不可变数据，<strong>Vuex</strong> 是可变的，每次都用新的 state 替换旧的，vuex 是直接修改</p>
+<p>Redux 监测数据变化是通过 diff 比较差异，Vuex 原理与 vue 相同，通过 getter/setter 比较</p>
+<h2 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h2><h3 id="Plugin-Loader-区别"><a href="#Plugin-Loader-区别" class="headerlink" title="Plugin/Loader 区别"></a><strong>Plugin/Loader 区别</strong></h3><ul>
+<li>Loader 是加载器 Webpack 将⼀切⽂件视为模块，但是 Webpack 原⽣是只能解析 JavaScript ⽂件，如果想将其他⽂件也打包的话，就会⽤到 Loader。 所以 Loader 的作⽤是让 Webpack 拥有了加载和解析非 JavaScript 文件的能力;</li>
+<li>Plugin 是插件 Plugin 可以扩展 Webpack 的功能,让 Webpack 具有灵活性。在 Webpack 运⾏的⽣命周期中会⼴播出许多事件，Plugin 可以监听这些事件，在合适的时机通过 Webpack 提供的 API 改变输出结果。</li>
+</ul>
+<h3 id="WebPack-中-bundle-chunk-module-的作用"><a href="#WebPack-中-bundle-chunk-module-的作用" class="headerlink" title="WebPack 中 bundle,chunk,module 的作用"></a><strong>WebPack 中 bundle,chunk,module 的作用</strong></h3><ul>
+<li>bundle 是由 Webpack 打包出来的文件;</li>
+<li>chunk 代码块,一个 chunk 由多个模块组合⽽成，⽤于代码的合并和分割;</li>
+<li>module 是开发中的单个模块，在 Webpack 中⼀个模块对应⼀个⽂件，Webpack 会从配置的 entry 中递归开始找出所有依赖的模块。</li>
+</ul>
+<h2 id="ES-moudle-和-CommonJS-区别"><a href="#ES-moudle-和-CommonJS-区别" class="headerlink" title="ES moudle 和 CommonJS 区别"></a>ES moudle 和 CommonJS 区别</h2><p>CommonJS 是对值的拷贝, 可以修改导出的值, 可以动态引入, 代码发生在运行时, 混合导出, 使用 exports 导出单个值以后, 就不能在导出一个对象值, 只会修改 exports 的对象改变 ES Moudle 是值的引用, 只读状态, 不能修改变量值, 不可以动态引入, 代码发生在编译时, 混合导出, 单个导出, 默认导出 互不影响</p>
+<p>CommonJS 是对模块的浅拷贝，ES6 Moundle 是对模块的引用，即 ES6 Moudle 只存不读，不能改变其值，也就是指针指向不变，类似 const</p>
+<p>import 的接口是 read-only（只读状态），不能修改变量值，不能改变指针</p>
+<h2 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h2><p><strong>Get 和 Post 请求的区别</strong></p>
+<ul>
+<li>应用场景: Get 请求一般用来获取数据, 一般 Get 请求用于对服务器资源不会产生影响; Post 请求一般用于对服务器产生影响的情景.</li>
+<li>是否缓存: 浏览器一般会对 Get 请求缓存, 但很少对 Post 缓存</li>
+<li>发送的报文格式: get 请求实体部分为空, post 为数据</li>
+<li>安全性: get 请求会将参数拼接到 url 上, 相对于 post 不安全, 会被历史记录保留</li>
+<li>请求长度: url 长度会被限制</li>
+<li>参数类型: post 请求支持更多数据类型</li>
+</ul>
+<p><strong>HTTP1.0 和 HTTP1.1 区别</strong></p>
+<ul>
+<li>连接方面: http1.0 默认非持久连接, http1.1 持久连接. http1.1 通过持久连接使多个 http 复用同一个 TCP 连接, 避免建立连接时延.</li>
+<li>资源请求方面: 1.0 不支持断点续传, 服务端发送完整对象. 1.1 加入了 range, 允许只请求部分资源,返回码 206</li>
+<li>缓存方面: 1.0 使用 header if_modified-since、Expires 做为缓存标准. 1.1 使用 Etag、if-Match、if-None-Match 缓存头控制</li>
+<li>1.1 新增 host 字段, 指定服务器域名. 1.0 认为每台服务器都绑定唯一 ip, 因此并没有传递主机名.</li>
+<li>1.1 新增许多请求方法, put head options</li>
+</ul>
+<p><strong>Http1.1 和 Http2.0 区别</strong></p>
+<ul>
+<li>二进制协议 1.1 文本 + 二进制; 2.0 纯二进制</li>
+<li>多路复用 仍复用 TCP 连接, 在同一个连接内, 客户端服务器都可以同时发送多个请求或回应, 不用按照顺序, 避免了队头阻塞</li>
+<li>数据流 2.0 采用数据流, 数据包不按顺序发送, 数据包发送的时候必须标记数据流 ID</li>
+<li>头信息压缩 1.1 协议不带状态, 每次请求必须携带所有信息, 2.0 头信息压缩 gzip/compress 压缩后发送; 另一方面客户端和服务器维护一个头信息表,所有字段存入,生成索引号,不发送相同字段</li>
+<li>服务器推送 2.0 允许服务器主动向客户端发送资源. 提前给客户端推送必要资源.</li>
+</ul>
+<h3 id="队头阻塞"><a href="#队头阻塞" class="headerlink" title="队头阻塞"></a>队头阻塞</h3><p>队头阻塞是由 http 规定报文必须是一发一收,这就是一个串行队列, 请求没有优先级, 只有入队顺序.</p>
+<p><strong>Https 和 Http 区别</strong></p>
+<ul>
+<li>https 需要 CA 证书, 费用较高</li>
+<li>http 是超文本传输协议, 明文传输, https 是 SSL 加密传输协议</li>
+<li>http 80 端口 https 443</li>
+<li>http 连接无状态; https 有 SSL 加密传输, 身份验证 更安全</li>
+</ul>
+<p><strong>多张图片, 加载</strong></p>
+<ul>
+<li>1 下, 浏览器对一个域名下最大 TCP 连接为 6, 会请求多次. 可以通过多域名部署解决.加快速度</li>
+<li>2 下, 瞬间加载多个资源, 多路复用, 可以发送多个请求</li>
+</ul>
+<p><strong>HTTP 协议的优点和缺点</strong></p>
+<ul>
+<li>简单快速</li>
+<li>无连接</li>
+<li>无状态</li>
+<li>灵活</li>
+</ul>
+<p><strong>浏览器渲染机制、重绘、重排</strong></p>
+<p>网页生成过程:</p>
+<ul>
+<li>HTML被html解析器解析成<code>DOM</code>树</li>
+<li>CSS被css解析器解析成<code>CSSOM</code>树</li>
+<li>结合<code>DOM</code>树和<code>CSSOM</code>树, 生成一颗渲染树(<code>Render Tree</code>)</li>
+<li>生成布局(<code>flow</code>), 即将所有渲染树的所有节点平面合成</li>
+<li>将布局绘制(<code>paint</code>)</li>
+</ul>
+<p>重排一定会引起重绘, 重绘不一定重排</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://blog.huangqian.vip">乾學長</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://blog.huangqian.vip/2022/07/09/basics/">http://blog.huangqian.vip/2022/07/09/basics/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/interview/">interview</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/07/09/FE-deploy/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">FE_deploy</div></div></a></div><div class="next-post pull-right"><a href="/2022/07/07/algorithm/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">algorithm</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">乾學長</div><div class="author-info__description">程序员除了素质，一无所有</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Basics"><span class="toc-number">1.</span> <span class="toc-text">Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BB%8E%E8%BE%93%E5%85%A5-url-%E5%88%B0%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2%EF%BC%8C%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-number">1.1.</span> <span class="toc-text">浏览器从输入 url 到渲染页面，发生了什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue-%E5%92%8C-React-%E5%AF%B9%E6%AF%94"><span class="toc-number">1.2.</span> <span class="toc-text">Vue 和 React 对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vuex-%E5%92%8C-Redux-%E5%8C%BA%E5%88%AB"><span class="toc-number">1.3.</span> <span class="toc-text">Vuex 和 Redux 区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack"><span class="toc-number">1.4.</span> <span class="toc-text">webpack</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Plugin-Loader-%E5%8C%BA%E5%88%AB"><span class="toc-number">1.4.1.</span> <span class="toc-text">Plugin&#x2F;Loader 区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WebPack-%E4%B8%AD-bundle-chunk-module-%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.4.2.</span> <span class="toc-text">WebPack 中 bundle,chunk,module 的作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES-moudle-%E5%92%8C-CommonJS-%E5%8C%BA%E5%88%AB"><span class="toc-number">1.5.</span> <span class="toc-text">ES moudle 和 CommonJS 区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.6.</span> <span class="toc-text">HTTP 协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%9F%E5%A4%B4%E9%98%BB%E5%A1%9E"><span class="toc-number">1.6.1.</span> <span class="toc-text">队头阻塞</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/07/09/FE-deploy/" title="FE_deploy"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FE_deploy"/></a><div class="content"><a class="title" href="/2022/07/09/FE-deploy/" title="FE_deploy">FE_deploy</a><time datetime="2022-07-08T19:26:24.000Z" title="Created 2022-07-09 03:26:24">2022-07-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/09/basics/" title="basics"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="basics"/></a><div class="content"><a class="title" href="/2022/07/09/basics/" title="basics">basics</a><time datetime="2022-07-08T18:56:42.000Z" title="Created 2022-07-09 02:56:42">2022-07-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/07/algorithm/" title="algorithm"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="algorithm"/></a><div class="content"><a class="title" href="/2022/07/07/algorithm/" title="algorithm">algorithm</a><time datetime="2022-07-06T19:15:36.000Z" title="Created 2022-07-07 03:15:36">2022-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2018/12/17/vue-router/" title="vue-router"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue-router"/></a><div class="content"><a class="title" href="/2018/12/17/vue-router/" title="vue-router">vue-router</a><time datetime="2018-12-17T14:49:53.000Z" title="Created 2018-12-17 22:49:53">2018-12-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2018/12/17/vuex/" title="vuex"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vuex"/></a><div class="content"><a class="title" href="/2018/12/17/vuex/" title="vuex">vuex</a><time datetime="2018-12-17T14:48:18.000Z" title="Created 2018-12-17 22:48:18">2018-12-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 乾學長</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
